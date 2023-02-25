@@ -26,9 +26,12 @@ for x in range(T):
     loginDayFrequency()
     print(' ')
 
-    friendLists = []
 
     def sameDayLogin():
+        global friendLists
+        # this list will contain all of the users login days
+        friendLists = []
+
         original_value = 1
         x = original_value
 
@@ -75,10 +78,13 @@ for x in range(T):
     simontaniousDays()
 
     # Here I create a text file containing the output for every test case
-    if x+1 == T:
-        # Open a file in write mode
-        with open('output.txt', 'w') as file:   
-            for r in range(len(results)):
-                # write data to the file
-                file.write(f'Case #{r+1}: {results[r]}\n')
-        file.close()    
+    def txt_file_output():
+        if x+1 == T:
+            # Open a file in write mode
+            with open('output.txt', 'w') as file:   
+                for r in range(len(results)):
+                    # write data to the file
+                    file.write(f'Case #{r+1}: {results[r]}\n')
+            file.close() 
+
+    txt_file_output()
