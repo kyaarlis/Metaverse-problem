@@ -1,6 +1,6 @@
 import math
 
-# T = int(input("Test case num: "))
+T = int(input("Test case num: "))
 friendsAndDays = input("Num of friends in your group and total days: ")
 
 inputs = friendsAndDays.split()
@@ -63,12 +63,24 @@ print(friendLists)
 def simontaniousDays():
     count = 1
 
-    for i in friendLists:
-        for j in friend:
-            if i == j:
-                count+=1
+    for i in range(len(friendLists[0])):
 
-    print(f'Both friend same day login happened {count} times')
+        current_num = friendLists[0][i]
+
+        # Flag to keep track of whether the number is found in all lists
+        found_in_all_lists = True
+
+        for j in range(1, len(friendLists)):
+
+            if current_num not in friendLists[j]:
+                found_in_all_lists = False
+                break
+         # Increment count if the current number is found in all lists
+        if found_in_all_lists:
+            count += 1
+
+    # print(f'All friend same day login happened {count} times')
+    print(f'Case #{T}: {count}')
 
 simontaniousDays()
             
