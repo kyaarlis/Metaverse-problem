@@ -3,31 +3,25 @@ T = int(input("Number of test cases: "))
 results = []
 
 for x in range(T):
-    friendsAndDays = input("Num of friends in your group and total days: ")
 
-    inputs = friendsAndDays.split()
+    def loginDayFrequencyPrompt():
+        frequencyPromt = input('Login day frequency for each friend: ')
 
-    # Total number of friends
-    N = int(inputs[0])
-    # Total number of days
-    M = int(inputs[1])
+        frequency = frequencyPromt.split()
 
-    frequency = []
-    Pn = []
+        int_frequency = []
 
-    def loginDayFrequency():
+        for s in frequency:
+            int_frequency.append(int(s))
+
+        Pn = int_frequency
+
         for x in range(N):
-            frequency = int(input(f'P {x+1}: '))
+            print('Friend', x+1 , 'logs in every', Pn[x], 'days')
 
-            print('Friend', x+1 , 'logs in every', frequency, 'days')
+        return Pn
 
-            Pn.append(frequency)
-
-    loginDayFrequency()
-    print(' ')
-
-
-    def sameDayLogin():
+    def sameDayLogin(Pn):
         global friendLists
         # this list will contain all of the users login days
         friendLists = []
@@ -35,8 +29,7 @@ for x in range(T):
         original_value = 1
         x = original_value
 
-        for i in range(N):    
-
+        for i in range(N):
             global friend
             friend = [] 
             for j in range(M):
@@ -50,9 +43,6 @@ for x in range(T):
 
             friendLists.append(friend)    
                         
-    sameDayLogin()
-
-    def simontaniousDays():
         global count
         count = 1
 
@@ -73,18 +63,28 @@ for x in range(T):
                 count += 1
         
         results.append(count)
-        print(f'Case #{x+1}: {count}')
 
-    simontaniousDays()
+
+    for x in range(T):
+        friendsAndDays = input("Num of friends in your group and total days: ")
+
+        inputs = friendsAndDays.split()
+
+        # Total number of friends
+        N = int(inputs[0])
+        # Total number of days
+        M = int(inputs[1])
+
+        Pn = loginDayFrequencyPrompt()
+
+        sameDayLogin(Pn)
 
     # Here I create a text file containing the output for every test case
     def txt_file_output():
-        if x+1 == T:
-            # Open a file in write mode
-            with open('output.txt', 'w') as file:   
-                for r in range(len(results)):
-                    # write data to the file
-                    file.write(f'Case #{r+1}: {results[r]}\n')
-            file.close() 
+        with open('output.txt', 'w') as file:   
+            for r in range(len(results)):
+                # write data to the file
+                file.write(f'Case #{r+1}: {results[r]}\n')
+        file.close() 
 
     txt_file_output()
